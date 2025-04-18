@@ -1,0 +1,9 @@
+version: '3'
+services:
+  airbnb-analyzer:
+    build: .
+    container_name: airbnb_profitability
+    volumes:
+      - .:/app
+    working_dir: /app
+    command: python city_loop.py
