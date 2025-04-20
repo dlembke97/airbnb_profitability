@@ -1,6 +1,13 @@
 FROM python:3.11-slim
+
 WORKDIR /app
-ADD . /app
-RUN pip install --no-cache-dir -r requirements.txt
-RUN pip install streamlit
-CMD ["python", "city_loop.py"]
+COPY . /app
+
+# Install pipenv
+RUN pip install pipenv
+
+# Install dependencies from Pipfile.lock
+RUN pipenv install --deploy --ignore-pipfile
+
+# Run Streamlit app or city_loop.py
+CMD ["pipenv", "run", "streamlit", "run", "streamlit_app.py"]
